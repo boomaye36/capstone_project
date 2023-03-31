@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.capstone.user.dao.UserDAO">
+ <!--  회원가입 id 중복확인 select -->
+	<select id="existingLoginId" parameterType="string"
+		resultType="int">
+		SELECT
+		COUNT(1)
+		FROM
+		`user`
+		WHERE
+		`loginid`=#{loginid}
+	</select>
+	
+	<!-- 회원가입 필수정보 insert -->
+	<insert id="insertUser" parameterType="com.capstone.user.model.User">
+		INSERT INTO `user`
+		(
+			`loginid`
+			,`password`
+			,`phonenumber`
+			,`nickname`
+			,`email`
+			,`profilephoto`
+			,`location`
+			,`path`
+			,`createdat`
+			,`updatedat`
+		)
+		VALUES
+		(
+			#{loginid}
+			,#{password}
+			,#{phonenumber}
+			,#{nickname}
+			,#{email}
+			,#{profilephoto}
+			,#{location}
+			,#{path}
+			,NOW()
+			,NOW()
+		)
+	</insert>
+	<!-- 로그인시 아이디 및 비밀번호 일치여부 확인 event -->
+	<select id="selectUserByLoginIdAndPassword" parameterType="com.capstone.user.model.User" resultType="com.capstone.user.model.User">
+		SELECT
+			*
+		FROM
+			`user`
+		WHERE
+			`loginid` = #{loginid}
+		AND
+			`password` = #{password}
+	</select>
+	</mapper>
