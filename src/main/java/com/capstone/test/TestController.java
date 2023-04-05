@@ -1,5 +1,6 @@
 package com.capstone.test;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -15,11 +16,24 @@ import com.capstone.test.dao.TestDAO;
  class TestController {
 	@Autowired
 	private TestDAO testdao;
+<<<<<<< HEAD
 	@RequestMapping("/test")
 	public String test(Model model) {
 		return "test";
 	}
 	@ResponseBody
+=======
+	@ResponseBody
+	@RequestMapping("/react")
+	public List<String> hello(){
+		return Arrays.asList("react", "hello");
+	}
+	@RequestMapping(" /test")
+	public String test(Model model) {
+		return "test";
+	}
+
+>>>>>>> main
 	@RequestMapping("/db")
 	public List<Map<String, Object>> databaseTest() {
 		return testdao.selectTestList();
