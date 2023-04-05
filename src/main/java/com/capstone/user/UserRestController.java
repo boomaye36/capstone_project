@@ -90,7 +90,8 @@ private UserBO userBO;
 	
 	//인증번호 보내기 event
 	@PostMapping("/user/sendMessage")
-	public Map<String, Object> sendSMS(@RequestParam("phoneNumber")String phoneNumber, HttpSession session) {
+	public Map<String, Object> sendSMS(@RequestParam("phoneNumber")String phoneNumber,
+			HttpSession session) {
 		String confirmNo = userBO.sendRandomMessage(phoneNumber);
 		session.setAttribute("confirmNo", confirmNo);
 		Map<String, Object> result = new HashMap<>();
@@ -100,7 +101,8 @@ private UserBO userBO;
 	
 	//인증번호 일치여부 event
 	@PostMapping("/user/confirmMessage")
-	public Map<String, Object> confirmSMS(@RequestParam("pnconfirm")String pnconfirm, @RequestParam("phoneNumber")String phoneNumber, HttpSession session) {
+	public Map<String, Object> confirmSMS(@RequestParam("pnconfirm")String pnconfirm, 
+			@RequestParam("phoneNumber")String phoneNumber, HttpSession session) {
 	    String confirmNo = (String) session.getAttribute("confirmNo");
 		Map<String, Object> result = new HashMap<>();
 		if (pnconfirm.equals(confirmNo)) {

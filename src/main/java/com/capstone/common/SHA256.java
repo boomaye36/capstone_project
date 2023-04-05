@@ -4,7 +4,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class SHA256 {
-
 	 public String encrypt(String text) throws NoSuchAlgorithmException {
 	        MessageDigest md = MessageDigest.getInstance("SHA-256");
 	        md.update(text.getBytes());
@@ -20,3 +19,6 @@ public class SHA256 {
 	        return builder.toString();
 	    }
 }
+/*
+ * text를 받아와 암호화하고 그 text를 16진수로 변환하는 Class
+ */

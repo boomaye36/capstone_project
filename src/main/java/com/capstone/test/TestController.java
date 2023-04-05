@@ -15,7 +15,7 @@ import com.capstone.test.dao.TestDAO;
  class TestController {
 	@Autowired
 	private TestDAO testdao;
-	@RequestMapping(" /test")
+	@RequestMapping("/test")
 	public String test(Model model) {
 		return "test";
 	}

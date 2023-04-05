@@ -26,3 +26,7 @@ public class DatabaseConfig {
         return sessionFactory.getObject();
     }
 }
+/*
+ * SqlSessionFactory란 SQLSession을 만들어주는 객체이다.
+ * PathMatchingResourcePatternResolver는 classPath에 위치한 resource를 가져오는 방법 중 하나이다.
+*/

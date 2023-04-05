@@ -2,7 +2,8 @@ package com.capstone.user.model;
 
 import java.util.Date;
 
-public class User {
+
+public class User { //db column
 	private int id;
 	private String loginid;
 	private String password;

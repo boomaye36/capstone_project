@@ -2,11 +2,16 @@ package com.capstone.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
+	@RequestMapping("/")
+	public @ResponseBody String root() throws Exception
+	{
+		return "root page";
+	}
 	@RequestMapping("/main")
 	public String main() {
 		return "user/main";

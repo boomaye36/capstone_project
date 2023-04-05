@@ -10,7 +10,7 @@ import com.capstone.user.model.User;
 import com.capstone.util.Naver_Sens_V2;
 
 @Service
-public class UserBO {
+public class UserBO{
 
 	@Autowired
 	private UserDAO userDAO;
