@@ -20,13 +20,9 @@ import com.capstone.test.dao.TestDAO;
 		return "test";
 	}
 	@ResponseBody
-
 	@RequestMapping("/db")
 	public List<Map<String, Object>> databaseTest() {
 		return testdao.selectTestList();
 	}
-	@RequestMapping("eunjoo")
-	public String tes2() {
-		return "test";
-	}
+	
 }
