@@ -103,7 +103,7 @@
 			}
 		});
 		$('#submit').on('click', function(){
-			if ($('#check-all').is(':checked') || ($('#check-first').is(':checked') && $('#check-second').is(':checked') && $('#check-third').is(':checked'))){
+			if ($('#check-first').is(':checked') && $('#check-second').is(':checked') && $('#check-third').is(':checked')){
 				document.location.href="/user/sign_up";
 			}else{
 				alert("필수 약관에 동의해주세요");
