@@ -4,10 +4,7 @@ import './index.css';
 import App from './components/App.js';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-<<<<<<< HEAD
-=======
 import { RecoilRoot } from 'recoil';
->>>>>>> main
 import { Provider } from 'react-redux';
 import store from './store.js';
 
