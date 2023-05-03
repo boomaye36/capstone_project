@@ -2,7 +2,9 @@ package com.capstone.user.model;
 
 import java.util.Date;
 
+import lombok.Data;
 
+@Data
 public class User { //db column
 	private int id;
 	private String loginid;
