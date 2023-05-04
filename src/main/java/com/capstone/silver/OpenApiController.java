@@ -1,29 +1,27 @@
 package com.capstone.silver;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import org.json.simple.parser.ParseException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 @RestController
 @RequiredArgsConstructor
 @Slf4j
 public class OpenApiController {
+	int count=0;
 	@GetMapping("/test")
 	public String test() throws Exception
 	{	
@@ -31,7 +29,7 @@ public class OpenApiController {
 		String base = "https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList";
 		String key = "?serviceKey=jxwOJdF3W7dg4P7he9%2F2hwaPwgDszkbSReBLZF6tdG55G%2BcZQflK6SsRbR%2BioSWMeADf0A3vKKiSAm3JgWUU4A%3D%3D";
 		String page = "&pageNo=1";
-		String rows = "&numOfRows=10";
+		String rows = "&numOfRows=76585";
 		String sideCd = "&sidoCd=310000";
 		String zipCd = "&zipCd=2040";
 		String clcd = "&clCd=28";
@@ -67,6 +65,53 @@ public class OpenApiController {
 		conn.disconnect();
 		StringToJson(sb.toString());
 		return sb.toString();
+	}
+	public void StringToJson(String result) throws Exception
+	{
+		JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
+        JsonArray itemArray = jsonObject.getAsJsonObject("response").getAsJsonObject("body").getAsJsonObject("items").getAsJsonArray("item");
+
+        for (int i = 0; i < itemArray.size(); i++) {
+            JsonObject item = itemArray.get(i).getAsJsonObject();
+            if(item!=null && !item.isJsonNull())
+            {
+            	
+	            String addr = item.get("addr").getAsString();
+	            String yadmNm = item.get("yadmNm").getAsString();
+	            String clCdNm = item.get("clCdNm").getAsString();
+	            if(clCdNm.equals("요양병원"))
+	            {
+	            	System.out.println("addr: " +addr);
+			        System.out.println("yadmNm: " +yadmNm);
+			        System.out.println("clCdNm: "+clCdNm);
+			        writeCSV(addr,yadmNm,clCdNm);
+	            }
+	            // String hospUrl = item.get("hospUrl").getAsString();
+		        
+		        //System.out.println("hospUrl: "+hospUrl);
+            }
+            else
+            {
+            	System.out.println(i+"번째 값이 null입니다.");
+            }
+
+        }
+	}
+	private void writeCSV(String addr, String yadmNm, String clCdNm) {
+		try {
+		    FileWriter csvWriter = new FileWriter("C://file.csv", true);
+		    csvWriter.append(addr);
+		    csvWriter.append(":");
+		    csvWriter.append(yadmNm);
+		    csvWriter.append(":");
+		    csvWriter.append(clCdNm);
+		    csvWriter.append("\n");
+		    csvWriter.flush();
+		    csvWriter.close();
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
 	}
 	@GetMapping("/test2")
 	public String test2() throws Exception
@@ -107,26 +152,10 @@ public class OpenApiController {
 		{
 			JsonObject item = rowArr.get(i).getAsJsonObject();
 			String sigunNm = item.get("SIGUN_NM").getAsString();
+			if(sigunNm.equals("안산시"))
 			System.out.println("sigunNm: " + sigunNm);
 		}
 		
 	}
-	public void StringToJson(String result) throws Exception
-	{
-		JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
 
-        JsonArray itemArray = jsonObject.getAsJsonObject("response").getAsJsonObject("body").getAsJsonObject("items").getAsJsonArray("item");
-
-        for (int i = 0; i < itemArray.size(); i++) {
-            JsonObject item = itemArray.get(i).getAsJsonObject();
-            String addr = item.get("addr").getAsString();
-            String yadmNm = item.get("yadmNm").getAsString();
-            String clCdNm = item.get("clCdNm").getAsString();
-            String hospUrl = item.get("hospUrl").getAsString();
-            System.out.println("addr: " + addr);
-            System.out.println("yadmNm: " +yadmNm);
-            System.out.println("clCdNm: "+clCdNm);
-            System.out.println("hospUrl: "+hospUrl);
-        }
-	}
 }
