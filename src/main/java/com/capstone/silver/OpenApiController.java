@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,7 @@ public class OpenApiController {
 	@GetMapping("/test")
 	public String test() throws Exception
 	{	
-		//은주 api 사이트 주소
+		//이은주 api 사이트 주소
 		String base = "https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList";
 		String key = "?serviceKey=jxwOJdF3W7dg4P7he9%2F2hwaPwgDszkbSReBLZF6tdG55G%2BcZQflK6SsRbR%2BioSWMeADf0A3vKKiSAm3JgWUU4A%3D%3D";
 		String page = "&pageNo=1";
@@ -35,7 +36,7 @@ public class OpenApiController {
 		String clcd = "&clCd=28";
 		String type = "&_type=json";
 
-//은주 오픈api사이트
+		//이은주 오픈api사이트
 		StringBuilder urlBuilder = new StringBuilder(base);
 		urlBuilder.append(key);
 		urlBuilder.append(page);
@@ -79,16 +80,23 @@ public class OpenApiController {
 	            String addr = item.get("addr").getAsString();
 	            String yadmNm = item.get("yadmNm").getAsString();
 	            String clCdNm = item.get("clCdNm").getAsString();
+	            Object hospUrl = item.get("hospUrl");
+	            if(hospUrl==null)
+	            {
+	            	hospUrl = (String) "null";
+	            }
+	            else
+	            {
+	            	hospUrl = item.get("hospUrl").getAsString();
+	            }
 	            if(clCdNm.equals("요양병원"))
 	            {
 	            	System.out.println("addr: " +addr);
 			        System.out.println("yadmNm: " +yadmNm);
 			        System.out.println("clCdNm: "+clCdNm);
-			        writeCSV(addr,yadmNm,clCdNm);
+			        System.out.println("hospUrl: "+hospUrl);
+			        writeCSV(addr,yadmNm,clCdNm,hospUrl);
 	            }
-	            // String hospUrl = item.get("hospUrl").getAsString();
-		        
-		        //System.out.println("hospUrl: "+hospUrl);
             }
             else
             {
@@ -97,22 +105,49 @@ public class OpenApiController {
 
         }
 	}
-	private void writeCSV(String addr, String yadmNm, String clCdNm) {
+	private void writeCSV(String addr, String yadmNm, String clCdNm, Object hospUrl) {
 		try {
-		    FileWriter csvWriter = new FileWriter("C://file.csv", true);
-		    csvWriter.append(addr);
-		    csvWriter.append(":");
-		    csvWriter.append(yadmNm);
-		    csvWriter.append(":");
-		    csvWriter.append(clCdNm);
-		    csvWriter.append("\n");
-		    csvWriter.flush();
-		    csvWriter.close();
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-		
+				FileWriter csvWriter = new FileWriter("C://file.csv", true);
+				if(count==0)
+				{
+					count=1;
+					csvWriter.append("주소");
+					csvWriter.append(";");
+					csvWriter.append("병원이름");
+					csvWriter.append(";");
+					csvWriter.append("병원종류");
+					csvWriter.append(";");
+					csvWriter.append("홈페이지");
+					csvWriter.append("\n");
+					csvWriter.append(addr);
+					csvWriter.append(";");
+					csvWriter.append(yadmNm);
+					csvWriter.append(";");
+					csvWriter.append(clCdNm);
+					csvWriter.append(";");
+					csvWriter.append((String) hospUrl);
+					csvWriter.append("\n");
+					csvWriter.flush();
+					csvWriter.close();			
+				}
+				else
+				{
+					csvWriter.append(addr);
+					csvWriter.append(";");
+					csvWriter.append(yadmNm);
+					csvWriter.append(";");
+					csvWriter.append(clCdNm);
+					csvWriter.append(";");
+					csvWriter.append((String) hospUrl);
+					csvWriter.append("\n");
+					csvWriter.flush();
+					csvWriter.close();
+				}
+			} catch (IOException e) {
+			    e.printStackTrace();
+			}
 	}
+		
 	@GetMapping("/test2")
 	public String test2() throws Exception
 	{
@@ -120,6 +155,7 @@ public class OpenApiController {
 		StringBuilder urlBuilder = new StringBuilder("https://openapi.gg.go.kr/RecuperationHospital"); /*URL*/
 		urlBuilder.append("?" +  URLEncoder.encode("Key=e773163cf73d429b81008f1c8b081444","UTF-8") ); /*인증키 (sample사용시에는 호출시 제한됩니다.)*/
 		urlBuilder.append("&" +  URLEncoder.encode("Type=json","UTF-8") ); /*요청파일타입 (xml,xmlf,xls,json) */
+	
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
@@ -148,6 +184,7 @@ public class OpenApiController {
 		JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
 		JsonArray rhArr = jsonObject.get("RecuperationHospital").getAsJsonArray();
 		JsonArray rowArr = rhArr.get(1).getAsJsonObject().get("row").getAsJsonArray();
+		HashMap<String, Object> map = new HashMap<>();
 		for(int i=0;i<rowArr.size();i++)
 		{
 			JsonObject item = rowArr.get(i).getAsJsonObject();
