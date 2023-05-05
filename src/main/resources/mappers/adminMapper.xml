@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.capstone.admin.dao.AdminDAO">
+ <insert id="insertSilver" parameterType="com.capstone.admin.model.Silver">
+		INSERT INTO `silver`
+		(
+			`name`
+			,`location`
+			,`phonenumber`
+			,`category`
+			,`photo`
+			,`open_time`
+			,`credit`
+			,`createdat`
+			,`updatedat`
+		)
+		VALUES
+		(
+			#{name}
+			,#{location}
+			,#{phonenumber}
+			,#{category}
+			,#{photo}
+			,#{open_time}
+			,#{credit}
+			,NOW()
+			,NOW()
+		)
+	</insert>
+ </mapper>
