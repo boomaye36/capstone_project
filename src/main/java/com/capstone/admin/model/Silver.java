@@ -11,6 +11,13 @@ public class Silver {
 	private String category;
 	private String photo;
 	private String open_time;
+	private String province;
+	public String getProvince() {
+		return province;
+	}
+	public void setProvince(String province) {
+		this.province = province;
+	}
 	public String getPhoto() {
 		return photo;
 	}

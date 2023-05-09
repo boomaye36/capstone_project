@@ -3,7 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.capstone.admin.dao.AdminDAO">
  <insert id="insertSilver" parameterType="com.capstone.admin.model.Silver">
-		INSERT INTO `silver`
+		INSERT IGNORE INTO `silver`
 		(
 			`name`
 			,`location`
@@ -27,5 +27,6 @@
 			,NOW()
 			,NOW()
 		)
+		
 	</insert>
  </mapper>
