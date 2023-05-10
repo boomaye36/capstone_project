@@ -12,6 +12,7 @@
 			,`photo`
 			,`open_time`
 			,`credit`
+			,`province`
 			,`createdat`
 			,`updatedat`
 		)
@@ -24,6 +25,7 @@
 			,#{photo}
 			,#{open_time}
 			,#{credit}
+			,#{province}
 			,NOW()
 			,NOW()
 		)
