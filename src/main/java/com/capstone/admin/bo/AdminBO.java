@@ -61,6 +61,8 @@ public class AdminBO {
 				silver.setName((String) tempJson.get("BIZPLC_NM"));
 				silver.setLocation((String) tempJson.get("REFINE_LOTNO_ADDR"));
 				silver.setCategory((String) tempJson.get("TREAT_SBJECT_CONT"));
+				silver.setXpos(String.valueOf(tempJson.get("REFINE_WGS84_LOGT")));
+				silver.setYpos(String.valueOf(tempJson.get("REFINE_WGS84_LAT")));
 				silver.setProvince("경기");
 				adminDAO.insertSilver(silver);
 

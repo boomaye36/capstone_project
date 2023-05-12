@@ -12,6 +12,20 @@ public class Silver {
 	private String photo;
 	private String open_time;
 	private String province;
+	private String xpos;
+	private String ypos;
+	public String getXpos() {
+		return xpos;
+	}
+	public void setXpos(String xpos) {
+		this.xpos = xpos;
+	}
+	public String getYpos() {
+		return ypos;
+	}
+	public void setYpos(String ypos) {
+		this.ypos = ypos;
+	}
 	public String getProvince() {
 		return province;
 	}

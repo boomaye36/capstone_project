@@ -76,8 +76,10 @@ private AdminDAO adminDAO;
 			silver.setName((String) tempJson.get("yadmNm"));
 			silver.setLocation((String) tempJson.get("addr"));
 			silver.setCategory(Sarr1[j]);
-			String add = (String) tempJson.get("addr");
-			silver.setProvince(add.substring(0,2));
+			silver.setProvince((String)tempJson.get("sidoCdNm"));
+			silver.setXpos(String.valueOf(tempJson.get("XPos")));
+			silver.setYpos(String.valueOf(tempJson.get("YPos")));
+			silver.setPhonenumber((String)tempJson.get("telno"));
 			adminDAO.insertSilver(silver);
 
 }

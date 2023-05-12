@@ -13,6 +13,8 @@
 			,`open_time`
 			,`credit`
 			,`province`
+			,`xpos`
+			,`ypos`
 			,`createdat`
 			,`updatedat`
 		)
@@ -26,6 +28,8 @@
 			,#{open_time}
 			,#{credit}
 			,#{province}
+			,#{xpos}
+			,#{ypos}
 			,NOW()
 			,NOW()
 		)
