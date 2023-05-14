@@ -18,9 +18,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://database-1.cvyoreexeqln.us-east-2.rds.amazonaws.com:3306/capstone?characterEncoding=UTF-8
+    url: jdbc:mysql://database-1.cvyoreexeqln.us-east-2.rds.amazonaws.com:3306/capstone_project?characterEncoding=UTF-8
     username: root
-    password: root
+    password: capstone
   mvc:
     static-path-pattern: /static/**
     view:

@@ -33,5 +33,7 @@
 		
 		
 	</insert>
-
+	<select id="getSilverList" parameterType="com.capstone.silver.dto.SilverDTO" resultType="com.capstone.silver.dto.SilverDTO">
+		select * from silver
+	</select>
 </mapper>

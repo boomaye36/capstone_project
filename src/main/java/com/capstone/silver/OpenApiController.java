@@ -34,6 +34,7 @@ public class OpenApiController {
 		String sideCd = "&sidoCd=310000";
 		String zipCd = "&zipCd=2040";
 		String clcd = "&clCd=28";
+		String dgsbjtCd1 = "&dgsbjtCd=00";
 		String type = "&_type=json";
 
 		//이은주 오픈api사이트
@@ -41,6 +42,7 @@ public class OpenApiController {
 		urlBuilder.append(key);
 		urlBuilder.append(page);
 		urlBuilder.append(rows);
+		urlBuilder.append(dgsbjtCd1);
 		urlBuilder.append(type);
 
 		
@@ -81,6 +83,7 @@ public class OpenApiController {
 	            String yadmNm = item.get("yadmNm").getAsString();
 	            String clCdNm = item.get("clCdNm").getAsString();
 	            Object hospUrl = item.get("hospUrl");
+	            String dgsbjtCd = item.get("dgsbjtCd").getAsString();
 	            if(hospUrl==null)
 	            {
 	            	hospUrl = (String) "null";
@@ -91,11 +94,11 @@ public class OpenApiController {
 	            }
 	            if(clCdNm.equals("요양병원"))
 	            {
-	            	System.out.println("addr: " +addr);
-			        System.out.println("yadmNm: " +yadmNm);
-			        System.out.println("clCdNm: "+clCdNm);
-			        System.out.println("hospUrl: "+hospUrl);
-			        writeCSV(addr,yadmNm,clCdNm,hospUrl);
+//	            	System.out.println("addr: " +addr);
+//			        System.out.println("yadmNm: " +yadmNm);
+//			        System.out.println("clCdNm: "+clCdNm);
+//			        System.out.println("hospUrl: "+hospUrl);
+			        writeCSV(addr,yadmNm,clCdNm,hospUrl,dgsbjtCd);
 	            }
             }
             else
@@ -105,7 +108,7 @@ public class OpenApiController {
 
         }
 	}
-	private void writeCSV(String addr, String yadmNm, String clCdNm, Object hospUrl) {
+	private void writeCSV(String addr, String yadmNm, String clCdNm, Object hospUrl, String dgsbjtCd) {
 		try {
 				FileWriter csvWriter = new FileWriter("C://file.csv", true);
 				if(count==0)
@@ -118,6 +121,8 @@ public class OpenApiController {
 					csvWriter.append("병원종류");
 					csvWriter.append(";");
 					csvWriter.append("홈페이지");
+					csvWriter.append(";");
+					csvWriter.append("진료과목");
 					csvWriter.append("\n");
 					csvWriter.append(addr);
 					csvWriter.append(";");
@@ -126,6 +131,8 @@ public class OpenApiController {
 					csvWriter.append(clCdNm);
 					csvWriter.append(";");
 					csvWriter.append((String) hospUrl);
+					csvWriter.append(";");
+					csvWriter.append(dgsbjtCd);
 					csvWriter.append("\n");
 					csvWriter.flush();
 					csvWriter.close();			
@@ -139,6 +146,8 @@ public class OpenApiController {
 					csvWriter.append(clCdNm);
 					csvWriter.append(";");
 					csvWriter.append((String) hospUrl);
+					csvWriter.append(";");
+					csvWriter.append(dgsbjtCd);
 					csvWriter.append("\n");
 					csvWriter.flush();
 					csvWriter.close();
@@ -189,8 +198,8 @@ public class OpenApiController {
 		{
 			JsonObject item = rowArr.get(i).getAsJsonObject();
 			String sigunNm = item.get("SIGUN_NM").getAsString();
-			if(sigunNm.equals("안산시"))
-			System.out.println("sigunNm: " + sigunNm);
+			map.put("sigunNm", sigunNm);
+			//여기에다가 bo -> dao -> query실행할 예정
 		}
 		
 	}
