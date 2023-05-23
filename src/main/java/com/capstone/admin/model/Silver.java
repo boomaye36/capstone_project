@@ -1,5 +1,6 @@
 package com.capstone.admin.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Silver {
@@ -14,6 +15,27 @@ public class Silver {
 	private String province;
 	private String xpos;
 	private String ypos;
+	private int doctorNo;
+	private String url;
+	private Date opendate;
+	public int getDoctorNO() {
+		return doctorNo;
+	}
+	public void setDoctorNO(int doctorNo) {
+		this.doctorNo = doctorNo;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public Date getOpendate() {
+		return opendate;
+	}
+	public void setOpendate(Date date) {
+		this.opendate = date;
+	}
 	public String getXpos() {
 		return xpos;
 	}
@@ -96,5 +118,6 @@ public class Silver {
 	public void setUpdatedat(Date updatedat) {
 		this.updatedat = updatedat;
 	}
+	
 	
 }

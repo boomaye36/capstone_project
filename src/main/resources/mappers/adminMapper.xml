@@ -17,6 +17,9 @@
 			,`ypos`
 			,`createdat`
 			,`updatedat`
+			,`opendate`
+			,`url`
+			,`doctorNo`
 		)
 		VALUES
 		(
@@ -32,6 +35,9 @@
 			,#{ypos}
 			,NOW()
 			,NOW()
+			,#{opendate}
+			,#{url}
+			,#{doctorNo}
 		)
 		
 	</insert>
