@@ -7,6 +7,25 @@
 		*
 	FROM
 		`silver`
+	<choose>
+	<when test="sort ==' '">
+	ORDER BY `id` ASC
+	</when> 
+	<when test="sort =='opendate'">
+	ORDER BY `opendate` ASC
+	</when>
+	<when test="sort =='doctorNo'">
+	ORDER BY `doctorNo` ASC
+	</when>
+	</choose>
+	</select>
 	
+	<select id="selectSilverCount" parameterType="map" resultType="int">
+		SELECT
+			COUNT(distinct `userId`)
+			FROM
+				`silverCount`
+			WHERE
+				`silverId` = #{silverId} 
 	</select>
  </mapper>
