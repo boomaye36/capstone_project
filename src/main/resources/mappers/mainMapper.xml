@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.capstone.main.dao.MainDAO">
+	<select id="selectSilverList" parameterType="com.capstone.admin.model.Silver" resultType="com.capstone.admin.model.Silver">
+	SELECT
+		*
+	FROM
+		`silver`
+	<choose>
+	<when test="sort ==' '">
+	ORDER BY `id` ASC
+	</when> 
+	<when test="sort =='opendate'">
+	ORDER BY `opendate` ASC
+	</when>
+	<when test="sort =='doctorNo'">
+	ORDER BY `doctorNo` ASC
+	</when>
+	</choose>
+	</select>
+	
+	<select id="selectSilverCount" parameterType="map" resultType="int">
+		SELECT
+			COUNT(distinct `userId`)
+			FROM
+				`silverCount`
+			WHERE
+				`silverId` = #{silverId} 
+	</select>
+ </mapper>
