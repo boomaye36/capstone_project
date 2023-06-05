@@ -15,6 +15,8 @@ import javax.crypto.spec.SecretKeySpec;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+
+
 public class Naver_Sens_V2 {
 	@SuppressWarnings("unchecked")
 	public void send_msg(String tel, String rand) {
