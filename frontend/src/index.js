@@ -4,6 +4,10 @@ import './index.css';
 import App from './components/App.js';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+<<<<<<< HEAD
+=======
+import { RecoilRoot } from 'recoil';
+>>>>>>> d7f0ab206b1aa7108176fa6e033b637e7cf995cc
 import { Provider } from 'react-redux';
 import store from './store.js';
 
