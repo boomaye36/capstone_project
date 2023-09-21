@@ -1,26 +1,16 @@
 package com.capstone.admin;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capstone.admin.bo.AdminBO;
 import com.capstone.admin.dao.AdminDAO;
 import com.capstone.admin.model.Silver;
+import com.capstone.map.Map;
 @Component
 @RestController
 public class AdminRestConroller {
@@ -28,10 +18,14 @@ public class AdminRestConroller {
 private AdminBO adminBO;
 @Autowired
 private AdminDAO adminDAO;
+
+// 1000초마다 실행
 @Scheduled(fixedDelay = 1000000)
 	public void callApi() throws IOException, ParseException {
 		Silver silver = new Silver();
+		//api 호출
 		adminBO.callApi(silver);
+		//또 다른 api 호출하기
 		adminBO.test(silver);
 	}
 }

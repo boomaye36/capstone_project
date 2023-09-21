@@ -7,7 +7,7 @@
 		*
 	FROM
 		`silver`
-	<choose>
+	<!-- <choose>
 	<when test="sort ==' '">
 	ORDER BY `id` ASC
 	</when> 
@@ -17,7 +17,7 @@
 	<when test="sort =='doctorNo'">
 	ORDER BY `doctorNo` ASC
 	</when>
-	</choose>
+	</choose> -->
 	</select>
 	
 	<select id="selectSilverCount" parameterType="map" resultType="int">

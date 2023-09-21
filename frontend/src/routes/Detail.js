@@ -1,97 +1,51 @@
-/** 
-import {useState, useEffect} from 'react';
+import { useLocation } from "react-router-dom";
+import {useEffect}  from "react";
+import styles from "../styles/Detail.module.css";
+import KakaoRoadView from "../components/detail/kakaoRoadView";
+import KakaoMap from "../components/detail/kakaoMap";
 
-// coin data 정보를 읽어오고 화면에 보이기.
-function App() {
-    const [loading, setLoding] = useState(true);
-    const [hospitals, setHospitals] = useState([]);
-    useEffect(() => {
-      fetch("https://openapi.gg.go.kr/RecuperationHospital?KEY=e773163cf73d429b81008f1c8b081444&Type=json")
-      .then((response)=>response.json())
-      .then((json)=>{
-        setLoding(false);
-        setHospitals(json.RecuperationHospital[1].row);
-      });
+// 요양시설 상세 페이지.
+function Detail() {
+    useEffect(()=>{
+        console.log("hihi")
     },[])
 
-  return (
-    <div className="App">
-      <h1>요양병원 정보</h1>
-      {
-        loading ? <strong>Loding...</strong> : null
-      }
-      <ul>
-        {
-          hospitals.map((hospital) => {
-            return (
-              <>
-                <li>지역 : {hospital.SIGUN_NM}</li>
-                <li>병원 이름 : {hospital.BIZPLC_NM}</li>
-                <li>진료 과목 : {hospital.TREAT_SBJECT_CONT}</li>
-                <br/>
-              </>
-            )
-          })
-        }
-      </ul>
-    </div>
-  );
+    // 각각의 상세 페이지에 넘어온 state를 가져오기 위해 uselocation을 사용.
+    const location = useLocation();
+    const data = location.state.item;
 
-}
-
-export default App;*/
-
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
-
-function App() {
-    // 리스트 객체
-    const [silverList, setList] = useState([{
-        id: '',
-        name: '',
-        location: '',
-        category: ''
-    }]);
-    // 백엔드단에서 리스트 객체를 가져오는 부분
-    useEffect(() => {
-        axios.get("/main/test")
-            .then(res => setList(res.data.silverList))
-            .catch(error => console.log(error))
-
-    }, []);
     return (
-        <div>
-            <div className="silverList">
-                <table className="silverTable">
-                    <thead>
-                    <tr>
-                        <th className="col-lg-2">
-                           이름 
-                        </th>
-                        <th className="col-lg-8">
-                            위치 
-                        </th>
-                        <th className="col-lg-2">
-                            카테고리 
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {/* list.map을 사용해서 반복문 구현 */}
-                    {silverList.map((silver, id) => {
-                        return (
-                            <tr key={silver.id}>
-                                <td>{silver.name}</td>
-                                <td>{silver.location}</td>
-                                <td>{silver.category}</td>
-                            </tr>
-                        )
-                    })}
-
-                    </tbody>
-                </table>
+        <div className={styles.detail__container}>
+            {
+                console.log(data)
+            }
+            <div className={styles.detail__none}/>
+            <div className={styles.detail__content}>
+                <div className={styles.detail__wrapper}>
+                    <div style={{ fontWeight: "700", fontSize: "xx-large", padding: "1%"}}>거리뷰</div>
+                    <KakaoRoadView lat={data.ypos} lng={data.xpos}/>
+                    <hr className={styles.detail__hr}/>
+                    <ul className={styles.detail__ul}>
+                        <li style={{ fontWeight: "700", fontSize: "xx-large"}}>
+                            {data.name}
+                        </li>
+                        <li style={{ fontWeight: "100"}}>
+                            주소 : {data.location}
+                        </li>
+                        <li style={{ fontWeight: "100"}}>
+                            전화번호 : {data.phonenumber}
+                        </li>
+                        <li>
+                            진료과목 : {data.category}
+                        </li>
+                    </ul>
+                    <hr className={styles.detail__hr}/>
+                    <div style={{ fontWeight: "700", fontSize: "xx-large", padding: "1%"}}>위치</div>
+                    <KakaoMap lat={data.ypos} lng={data.xpos}/>
+                </div>
             </div>
         </div>
-    );
+    )
 }
-export default  App;
+
+export default Detail;

@@ -1,9 +1,9 @@
 package com.capstone.user;
 
-import java.util.Arrays;
-import java.util.List;
+
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -14,11 +14,11 @@ public class UserController {
 	public String main() {
 		return "user/main";
 	}
-	@RequestMapping("/sign_in")
+	@GetMapping("/sign_in")
 	public String signIn() {
 		return "user/terms";
 	}
-	@RequestMapping("/sign_up")
+	@GetMapping("/sign_up")
 	public String signUp(){
 		return "user/sign_up";
 	}

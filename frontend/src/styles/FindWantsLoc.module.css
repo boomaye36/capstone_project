@@ -16,12 +16,6 @@
     width : 100%;
     height : 100px;
     background-color: skyblue;
-    text-align: center;
-}
-
-.facility__text {
-    font-weight: bold;
-    padding-top: 10px;
 }
 
 .facility__header ul {
@@ -40,10 +34,4 @@
     height : 50px;
     border-radius: 40px;
     background-color: white;
-}
-
-.facility__searchCon {
-    position: relative;
-    padding-top: 10px;
-    cursor: pointer;
 }

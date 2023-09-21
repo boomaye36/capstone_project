@@ -7,52 +7,51 @@ import image1 from "../backgroundImage/image1.jpg";
 import image2 from "../backgroundImage/image2.jpg";
 import image3 from "../backgroundImage/image3.jpg";
 
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 
-const Home = () => {
-    // fade-in으로 img를 생성하기 위해 styled-components를 사용
-    const StyledImg = styled.img`
-        animation: fadein 3s;
-        -moz-animation: fadein 3s; /* Firefox */
-        -webkit-animation: fadein 3s; /* Safari and Chrome */
-        -o-animation: fadein 3s; /* Opera */
-        @keyframes fadein {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        @-moz-keyframes fadein { /* Firefox */
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        @-webkit-keyframes fadein { /* Safari and Chrome */
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        @-o-keyframes fadein { /* Opera */
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-    `
+// fade-in으로 img를 생성하기 위해 styled-components를 사용
+const StyledImg = styled.img`
+animation: fadein 3s;
+-moz-animation: fadein 3s; /* Firefox */
+-webkit-animation: fadein 3s; /* Safari and Chrome */
+-o-animation: fadein 3s; /* Opera */
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+`
 
+const Home = () => {
 
     let imageArr = [image1,image2,image3];
     const [mainImage, setMainImage] = useState(image1);
@@ -68,6 +67,7 @@ const Home = () => {
             setMainImage(imageArr[random]);
             setLastRandom(random);
         }, 20000)
+        // getAccessToken();
         return () => clearInterval(randomImage);
     }, [imageArr])
 
