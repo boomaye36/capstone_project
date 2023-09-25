@@ -28,4 +28,15 @@
 			WHERE
 				`silverId` = #{silverId} 
 	</select>
+	
+	<select id="selectSilverSearchList" parameterType="map" resultType="com.capstone.admin.model.Silver">
+	SELECT
+		*
+	FROM
+		`silver`
+	where
+		`name` like concat ('%', #{name},'%')
+	LIMIT #{start}, #{pageSize} 
+	<!-- search 쿼리 star 페이지붜 pageSize 개수만큼 -->
+	</select>
  </mapper>

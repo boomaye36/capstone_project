@@ -53,15 +53,14 @@ public class MainBO {
 
 package com.capstone.main.bo;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capstone.admin.model.Silver;
-import com.capstone.admin.model.SilverCountView;
 import com.capstone.main.dao.MainDAO;
 
 @Service
@@ -93,6 +92,15 @@ public class MainBO {
 //		}
 		return silverList;
 	}
+	public List<Silver> getSearchList(String name, int pageNumber, int pageSize) {
+	    int start = (pageNumber - 1) * pageSize;
+	    Map<String, Object> parameters = new HashMap<>();
+	    parameters.put("name", name);
+	    parameters.put("start", start);
+	    parameters.put("pageSize", pageSize);
+	    return mainDAO.selectSilverSearchList(parameters);
+	}
+
 }
 
 

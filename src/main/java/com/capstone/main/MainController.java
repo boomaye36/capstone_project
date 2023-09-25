@@ -64,9 +64,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.capstone.admin.model.Silver;
-import com.capstone.admin.model.SilverCountView;
 import com.capstone.main.bo.MainBO;
-import com.capstone.user.model.User;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -91,10 +89,19 @@ private MainBO mainBO;
 public Map<String, Object> selectSilver(HttpSession session, Silver silver, Model model) {
 Map<String, Object> result = new HashMap<>();
     List<Silver> silverList = mainBO.getSilverList(silver);
-    for (Silver s : silverList) {
-    	//System.out.println(s.getName());
-    }
+   
     result.put("silverList", silverList);
     return result;
 }
+@GetMapping("/search")
+@ResponseBody
+public Map<String, Object> searchSilver(@RequestParam("name") String name, 
+										@RequestParam("start") int start, Model model){
+	Map<String, Object> result = new HashMap<>();
+	List<Silver> silverSearchList = mainBO.getSearchList(name, start, 5); // start 페이지 부터 5개씩 정렬 
+	
+	result.put("silverSearchList", silverSearchList);
+	return result;
+}
+
 }
