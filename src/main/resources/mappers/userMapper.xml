@@ -53,4 +53,21 @@
 		AND
 			`password` = #{password}
 	</select>
+	
+	<select id="isExistUser" parameterType="map" resultType="boolean">
+		select count(1)
+		from
+			`user`
+		where
+			`loginid` = #{loginid}
+	</select>
+	
+	<select id="selectUserByLoginId" parameterType="com.capstone.user.model.User" resultType="com.capstone.user.model.User">
+	SELECT 
+		*
+	FROM
+		`user`
+	WHERE
+		`loginid` = #{loginid}
+	</select>
 	</mapper>

@@ -43,4 +43,10 @@ public class UserBO {
 
 		    return numStr;
 		}
+		public boolean isExistUser(String loginid) {
+			return userDAO.isExistUser(loginid);
+		}
+		public User getUserByLoginId(String loginid) {
+			return userDAO.selectUserByLoginId(loginid);
+		}
 }
