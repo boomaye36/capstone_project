@@ -103,5 +103,16 @@ public Map<String, Object> searchSilver(@RequestParam("name") String name,
 	result.put("silverSearchList", silverSearchList);
 	return result;
 }
+@GetMapping("/relate")
+@ResponseBody
+public Map<String, Object> getRelateHospital(@RequestParam("name") String name){
+	Map<String, Object> result = new HashMap<>();
+	List<Silver> relateSilverList = mainBO.getRelateSilverList(name);
+	result.put("relateSilverList", relateSilverList);
+	for (Silver s : relateSilverList) {
+		System.out.println(s.getName());
+	}
+	return result;
+}
 
 }

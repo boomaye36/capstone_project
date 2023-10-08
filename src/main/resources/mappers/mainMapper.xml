@@ -39,4 +39,17 @@
 	LIMIT #{start}, #{pageSize} 
 	<!-- search 쿼리 star 페이지붜 pageSize 개수만큼 -->
 	</select>
+	
+	<select id="selectRelateSilverList" parameterType="map" resultType="com.capstone.admin.model.Silver">
+		SELECT
+		*
+		FROM 
+		`silver` s
+			INNER JOIN `recommended_hospitals` r
+			ON s.name = r.recommended_hospital
+
+		WHERE r.original_hospital = #{name}
+		ORDER BY RAND() 
+		LIMIT 3
+	</select>
  </mapper>

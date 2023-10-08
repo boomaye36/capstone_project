@@ -31,4 +31,6 @@ public interface MainDAO {
 	public List<Silver> selectSilverList(Silver silver);
 	public int selectSilverCount( @Param("silverId") int SilverId);
 	public List<Silver> selectSilverSearchList(Map<String, Object> parameters);
+	public List<Silver> selectRelateSilverList(@Param("name")String name);
+
 }

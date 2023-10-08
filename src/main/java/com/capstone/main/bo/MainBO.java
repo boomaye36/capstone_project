@@ -100,6 +100,10 @@ public class MainBO {
 	    parameters.put("pageSize", pageSize);
 	    return mainDAO.selectSilverSearchList(parameters);
 	}
+	
+	public List<Silver> getRelateSilverList(String name){
+		return mainDAO.selectRelateSilverList(name);
+	}
 
 }
 
