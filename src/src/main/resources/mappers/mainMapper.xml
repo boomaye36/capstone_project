@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.capstone.main.dao.MainDAO">
+	<select id="selectSilverList" parameterType="com.capstone.admin.model.Silver" resultType="com.capstone.admin.model.Silver">
+	SELECT
+		*
+	FROM
+		`silver`
+	<!-- <choose>
+	<when test="sort ==' '">
+	ORDER BY `id` ASC
+	</when> 
+	<when test="sort =='opendate'">
+	ORDER BY `opendate` ASC
+	</when>
+	<when test="sort =='doctorNo'">
+	ORDER BY `doctorNo` ASC
+	</when>
+	</choose> -->
+	</select>
+	
+	<select id="selectSilverCount" parameterType="map" resultType="int">
+		SELECT
+			COUNT(distinct `userId`)
+			FROM
+				`silverCount`
+			WHERE
+				`silverId` = #{silverId} 
+	</select>
+	
+	<select id="selectSilverSearchList" parameterType="map" resultType="com.capstone.admin.model.Silver">
+	SELECT
+		*
+	FROM
+		`silver`
+	where
+		`name` like concat ('%', #{name},'%')
+	LIMIT #{start}, #{pageSize} 
+	<!-- search 쿼리 star 페이지붜 pageSize 개수만큼 -->
+	</select>
+	
+	<select id="selectRelateSilverList" parameterType="map" resultType="com.capstone.admin.model.Silver">
+		SELECT
+		*
+		FROM 
+		`silver` s
+			INNER JOIN `recommended_hospitals` r
+			ON s.name = r.recommended_hospital
+
+		WHERE r.original_hospital = #{name}
+		ORDER BY RAND() 
+		LIMIT 3
+	</select>
+ </mapper>

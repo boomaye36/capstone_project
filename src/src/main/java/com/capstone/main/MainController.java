@@ -84,7 +84,7 @@ private MainBO mainBO;
 //	}
 
 @ResponseBody
-//@CrossOrigin(origins="*")
+@CrossOrigin(origins="*")
 @GetMapping("/")
 public Map<String, Object> selectSilver(HttpSession session, Silver silver, Model model) {
 Map<String, Object> result = new HashMap<>();
@@ -92,17 +92,6 @@ Map<String, Object> result = new HashMap<>();
    
     result.put("silverList", silverList);
     return result;
-}
-@GetMapping(value="/",params="relate")
-public Map<String, Object> getRelateHospital(@RequestParam("name") String name){
-	Map<String, Object> result = new HashMap<>();
-	List<Silver> relateSilverList = mainBO.getRelateSilverList(name);
-	result.put("relateSilverList", relateSilverList);
-	for(Silver s : relateSilverList)
-	{
-		System.out.println(s.getName());
-	}
-	return result;
 }
 @GetMapping("/search")
 @ResponseBody
@@ -114,9 +103,9 @@ public Map<String, Object> searchSilver(@RequestParam("name") String name,
 	result.put("silverSearchList", silverSearchList);
 	return result;
 }
-//@GetMapping("/relate")
-//@ResponseBody
-/*public Map<String, Object> getRelateHospital(@RequestParam("name") String name){
+@GetMapping("/relate")
+@ResponseBody
+public Map<String, Object> getRelateHospital(@RequestParam("name") String name){
 	Map<String, Object> result = new HashMap<>();
 	List<Silver> relateSilverList = mainBO.getRelateSilverList(name);
 	result.put("relateSilverList", relateSilverList);
@@ -124,6 +113,6 @@ public Map<String, Object> searchSilver(@RequestParam("name") String name,
 		System.out.println(s.getName());
 	}
 	return result;
-}*/
+}
 
 }
