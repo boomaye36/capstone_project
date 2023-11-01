@@ -53,6 +53,7 @@ public class MainBO {
 
 package com.capstone.main.bo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +61,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capstone.admin.model.Hospital;
 import com.capstone.admin.model.Silver;
 import com.capstone.main.dao.MainDAO;
 
@@ -85,6 +87,7 @@ public class MainBO {
 	private MainDAO mainDAO;
 	public List<Silver> getSilverList(Silver silver){
 		List<Silver> silverList =  mainDAO.selectSilverList(silver);
+
 //		for (Silver x : silverList) {
 //			SilverCountView silvercount = new SilverCountView();
 //			silvercount.setSilver(x);
@@ -104,9 +107,20 @@ public class MainBO {
 	public List<Silver> getRelateSilverList(String name){
 		return mainDAO.selectRelateSilverList(name);
 	}
+	public List<Hospital> getAllSilverList(Silver silver) {
+	    List<Silver> silverList = mainDAO.selectSilverList(silver);
+	    List<Hospital> hList = new ArrayList<>();
+	    
+	    for (Silver s : silverList) {
+	        List<Silver> rList = mainDAO.selectRelateSilverList(s.getName());
+	        
+	        Hospital hospital = new Hospital();
+	        hospital.setSilver(s);
+	        hospital.setRecommendedList(rList);
+	        hList.add(hospital);
+	    }
+
+	    return hList;
+	}
 
 }
-
-
-
-

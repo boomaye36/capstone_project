@@ -51,6 +51,7 @@ public Map<String, Object> selectSilver(HttpSession session, Silver silver, Mode
 
 package com.capstone.main;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,11 +59,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.capstone.admin.model.Hospital;
 import com.capstone.admin.model.Silver;
 import com.capstone.main.bo.MainBO;
 
@@ -93,14 +94,16 @@ Map<String, Object> result = new HashMap<>();
     result.put("silverList", silverList);
     return result;
 }
-@GetMapping(value="/",params="relate")
-public Map<String, Object> getRelateHospital(@RequestParam("name") String name){
+@ResponseBody
+@GetMapping(value="/relate")
+public Map<String, Object> getRelateHospital(Silver silver){
 	Map<String, Object> result = new HashMap<>();
-	List<Silver> relateSilverList = mainBO.getRelateSilverList(name);
+	List<Hospital> relateSilverList = mainBO.getAllSilverList(silver);
 	result.put("relateSilverList", relateSilverList);
-	for(Silver s : relateSilverList)
+	for(Hospital s : relateSilverList)
 	{
-		System.out.println(s.getName());
+		List<Silver> list = s.getRecommendedList();
+		for (Silver si : list) System.out.println(si.getName());
 	}
 	return result;
 }
@@ -116,14 +119,14 @@ public Map<String, Object> searchSilver(@RequestParam("name") String name,
 }
 //@GetMapping("/relate")
 //@ResponseBody
-/*public Map<String, Object> getRelateHospital(@RequestParam("name") String name){
-	Map<String, Object> result = new HashMap<>();
-	List<Silver> relateSilverList = mainBO.getRelateSilverList(name);
-	result.put("relateSilverList", relateSilverList);
-	for (Silver s : relateSilverList) {
-		System.out.println(s.getName());
-	}
-	return result;
-}*/
+//public Map<String, Object> getRelateHospital(@RequestParam("name") String name){
+//	Map<String, Object> result = new HashMap<>();
+//	List<Silver> relateSilverList = mainBO.getRelateSilverList(name);
+//	result.put("relateSilverList", relateSilverList);
+//	for (Silver s : relateSilverList) {
+//		System.out.println(s.getName());
+//	}
+//	return result;
+//}
 
 }
