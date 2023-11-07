@@ -24,6 +24,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.capstone.admin.model.Silver;
+import com.capstone.admin.model.new_table;
 
 @Repository
 public interface MainDAO {
@@ -32,5 +33,5 @@ public interface MainDAO {
 	public int selectSilverCount( @Param("silverId") int SilverId);
 	public List<Silver> selectSilverSearchList(Map<String, Object> parameters);
 	public List<Silver> selectRelateSilverList(@Param("name")String name);
-
+	public List<new_table> selectnewList(new_table newTable);
 }

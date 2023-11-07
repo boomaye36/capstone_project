@@ -63,6 +63,7 @@ import org.springframework.stereotype.Service;
 
 import com.capstone.admin.model.Hospital;
 import com.capstone.admin.model.Silver;
+import com.capstone.admin.model.new_table;
 import com.capstone.main.dao.MainDAO;
 
 @Service
@@ -110,6 +111,7 @@ public class MainBO {
 	public List<Hospital> getAllSilverList(Silver silver) {
 	    List<Silver> silverList = mainDAO.selectSilverList(silver);
 	    List<Hospital> hList = new ArrayList<>();
+<<<<<<< Updated upstream
 	    
 	    for (Silver s : silverList) {
 	        List<Silver> rList = mainDAO.selectRelateSilverList(s.getName());
@@ -122,5 +124,27 @@ public class MainBO {
 
 	    return hList;
 	}
+=======
+
+	    for (Silver s : silverList) {
+	        List<Silver> rList = mainDAO.selectRelateSilverList(s.getName());
+
+	        Hospital hospital = new Hospital();
+	        hospital.setSilver(s);
+	        hospital.setRecommendedList(rList);
+	        hList.add(hospital);
+	    }
+
+	    return hList;
+	}
+	public List<new_table> getNewList(new_table newTable){
+		List<new_table> newList = mainDAO.selectnewList(newTable);
+		return newList;
+	}
+}
+
+
+
+>>>>>>> Stashed changes
 
 }

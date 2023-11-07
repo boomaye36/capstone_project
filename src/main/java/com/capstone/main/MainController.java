@@ -50,7 +50,10 @@ public Map<String, Object> selectSilver(HttpSession session, Silver silver, Mode
 
 
 package com.capstone.main;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,15 +65,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 import com.capstone.admin.model.Hospital;
 import com.capstone.admin.model.Silver;
+import com.capstone.admin.model.new_table;
 import com.capstone.main.bo.MainBO;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class MainController {
+<<<<<<< Updated upstream
 @Autowired
 private MainBO mainBO;
 //@ResponseBody
@@ -130,3 +138,61 @@ public Map<String, Object> searchSilver(@RequestParam("name") String name,
 //}
 
 }
+=======
+	@Autowired
+	private MainBO mainBO;
+	//@ResponseBody
+	//	@GetMapping("/main/test")
+	//	public Map<String, Object> selectSilver(HttpSession session, Silver silver, Model model, @RequestParam("sort") String sort) {
+	//	User user = (User)session.getAttribute("loginUser");
+	//	Integer userId = (Integer)user.getId();
+	//	Map<String, Object> result = new HashMap<>();
+	//	    List<SilverCountView> silverList = mainBO.getSilverList(silver, sort, userId);
+	//	    result.put("silverList", silverList);
+	//	    return result;
+	//	}
+	
+	@ResponseBody
+	//@CrossOrigin(origins="*")
+	@GetMapping("/")
+	public Map<String, Object> selectSilver(HttpSession session, Silver silver, Model model) {
+	Map<String, Object> result = new HashMap<>();
+	    List<Silver> silverList = mainBO.getSilverList(silver);
+	   
+	    result.put("silverList", silverList);
+	    return result;
+	}
+	@ResponseBody
+	@GetMapping(value="/relate")
+	public Map<String, Object> getRelateHospital(Silver silver){
+		Map<String, Object> result = new HashMap<>();
+		List<Hospital> relateSilverList = mainBO.getAllSilverList(silver);
+		result.put("relateSilverList", relateSilverList);
+		for(Hospital s : relateSilverList)
+		{
+			List<Silver> list = s.getRecommendedList();
+			for (Silver si : list) System.out.println(si.getName());
+		}
+		return result;
+	}
+	@GetMapping("/search")
+	@ResponseBody
+	public Map<String, Object> searchSilver(@RequestParam("name") String name, 
+											@RequestParam("start") int start, Model model){
+		Map<String, Object> result = new HashMap<>();
+		List<Silver> silverSearchList = mainBO.getSearchList(name, start, 5); // start 페이지 부터 5개씩 정렬 
+		
+		result.put("silverSearchList", silverSearchList);
+		return result;
+	}
+	@GetMapping("/relate1")
+	@ResponseBody
+	public Map<String, Object> selectNew(HttpSession session, new_table newTable, Model model)
+	{
+		Map<String, Object> result = new HashMap<>();
+		List<new_table> newList = mainBO.getNewList(newTable);
+		result.put("newList",newList);
+		return result;
+	}
+}
+>>>>>>> Stashed changes

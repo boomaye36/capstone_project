@@ -52,4 +52,7 @@
 		ORDER BY RAND() 
 		LIMIT 3
 	</select>
+	<select id="selectnewList" parameterType = "map" resultType="com.capstone.admin.model.new_table">
+		SELECT * FROM `new_table` where original_hospital = #{original_hospital}
+	</select>
  </mapper>
