@@ -111,20 +111,6 @@ public class MainBO {
 	public List<Hospital> getAllSilverList(Silver silver) {
 	    List<Silver> silverList = mainDAO.selectSilverList(silver);
 	    List<Hospital> hList = new ArrayList<>();
-<<<<<<< Updated upstream
-	    
-	    for (Silver s : silverList) {
-	        List<Silver> rList = mainDAO.selectRelateSilverList(s.getName());
-	        
-	        Hospital hospital = new Hospital();
-	        hospital.setSilver(s);
-	        hospital.setRecommendedList(rList);
-	        hList.add(hospital);
-	    }
-
-	    return hList;
-	}
-=======
 
 	    for (Silver s : silverList) {
 	        List<Silver> rList = mainDAO.selectRelateSilverList(s.getName());
@@ -141,10 +127,4 @@ public class MainBO {
 		List<new_table> newList = mainDAO.selectnewList(newTable);
 		return newList;
 	}
-}
-
-
-
->>>>>>> Stashed changes
-
 }

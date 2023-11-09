@@ -24,8 +24,6 @@ public class Hospital {
 	public void setRecommendedList(List<Silver> recommendedList) {
 		this.recommendedList = recommendedList;
 	}
-<<<<<<< Updated upstream
+
 }
-=======
-}
->>>>>>> Stashed changes
+

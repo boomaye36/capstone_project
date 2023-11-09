@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 import { useEffect, useState} from "react";
 import axios from "axios";
 
@@ -20,6 +20,14 @@ function App() {
       })
       .catch(error => console.log(error))
    }, []);
+ 
+  useEffect(() => {
+      axios.get("http://ec2-3-34-136-247.ap-northeast-2.compute.amazonaws.com:8080/relate1?original_hospital=경기도노인전문남양주병원")
+      .then(res => {
+       	console.log(res)
+      })
+      .catch(error => console.log(error))
+   }, []);
 
   return (
     <div className="App">
@@ -35,31 +43,4 @@ function App() {
 }
 
 export default App;
-=======
-import { useEffect } from "react";
-import axios from "axios";
 
-import RouterWeb from "./RouterWeb.js";
-import { silverDataAtom } from "../../recoil/silverDataAtom.js";
-import { useRecoilState, useSetRecoilState } from "recoil";
-
-function App() {
-  const setSilverData = useSetRecoilState(silverDataAtom);
-  
-  useEffect(() => {
-      axios.get("http://ec2-3-34-136-247.ap-northeast-2.compute.amazonaws.com:8080//")
-      .then(res => {
-        setSilverData(res.data.silverList)
-      })
-      .catch(error => console.log(error))
-   }, []);
-
-  return (
-    <div className="App">
-      <RouterWeb/>
-    </div>
-  );
-}
-
-export default App;
->>>>>>> Stashed changes
